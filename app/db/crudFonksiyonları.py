@@ -1,5 +1,5 @@
 from flask import request, jsonify
-from app.models.user_model import db, User
+from app.models.models import db, User
 
 def create_user():
     name = request.form.get('name')
@@ -11,8 +11,7 @@ def create_user():
 
 def get_users():
     users = User.query.all()
-    users_list = [{'id': user.id, 'name': user.name, 'email': user.email} for user in users]  # 'username' yerine 'name'
-    return jsonify(users_list), 200
+    return users  # Kullanıcıları döndür
 
 def update_user(id):
     user = User.query.get(id)
