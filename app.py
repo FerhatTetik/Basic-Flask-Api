@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, redirect, url_for
 from app.config import Config
-from app.models.models import db, User
-from app.db.crudFonksiyonları import create_user, get_users, delete_user, update_user
+from app.models.models import db
+from app.db.crudFonksiyonları import handle_users_list, handle_add_user, handle_update_user, handle_delete_user
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='app/templates')
 app.config.from_object(Config)
 
 db.init_app(app)
@@ -13,21 +13,19 @@ with app.app_context():
 
 @app.route('/users')
 def users_list():
-    users = get_users()  # get_users() fonksiyonunu kullan
-    return render_template('users_list.html', users=users)
+    return handle_users_list()
 
 @app.route('/users/add', methods=['GET', 'POST'])
 def add_user():
-    create_user()
-    return render_template('add_user.html')
+    return handle_add_user()
 
-@app.route('/users/update/<int:id>', methods=['PUT'])
+@app.route('/users/update/<int:id>', methods=['GET', 'POST'])
 def modify_user(id):
-    return update_user(id)
+    return handle_update_user(id)
 
 @app.route('/users/delete/<int:id>', methods=['DELETE'])
 def remove_user(id):
-    return delete_user(id)
+    return handle_delete_user(id)
 
 @app.route('/')
 def anaSayfa():
