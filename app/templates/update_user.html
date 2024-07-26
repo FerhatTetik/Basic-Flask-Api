@@ -46,6 +46,10 @@
                 <label for="email">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
             </div>
+            <div class="form-group">
+              <label for="book_quantity">Adet:</label>
+              <input type="book_quantity" class="form-control" id="book_quantity" name="book_quantity" value="{{ user.book_quantity }}" required>
+            </div>
             <button type="submit" class="btn btn-primary">Update User</button>
             <a href="{{ url_for('users_list') }}" class="btn btn-secondary">Back to Users List</a>
         </form>

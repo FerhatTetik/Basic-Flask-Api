@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_migrate import Migrate
 from app.config import Config
 from app.models.models import db
 from app.db.crudFonksiyonları import handle_users_list, handle_add_user, handle_update_user, handle_delete_user, handle_books_list, handle_add_book, handle_update_book, handle_delete_book

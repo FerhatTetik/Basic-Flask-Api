@@ -45,7 +45,11 @@
             <div class="form-group">
               <label for="author">price:</label>
               <input type="price" class="form-control" id="price" name="price" required>
-          </div>
+            </div>
+            <div class="form-group">
+              <label for="author">Stok</label>
+              <input type="stock" class="form-control" id="stock" name="stock" required>
+            </div>
             <button type="submit" class="btn btn-primary">Kitapyı Oluştur</button>
             <a href="{{ url_for('books_list') }}" class="btn btn-secondary">Listeye geri Dön</a>
         </form>

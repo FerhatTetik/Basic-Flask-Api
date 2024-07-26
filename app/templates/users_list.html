@@ -61,6 +61,8 @@
                 <tr>
                     <th scope="col">İsim</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Kitap Adı</th>
+                    <th scope="col">Adet</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -69,6 +71,7 @@
                     <tr>
                         <td>{{ user.name }}</td>
                         <td>{{ user.email }}</td>
+                        <td>{{ user.book_quantity }}</td>
                         <td>
                             <button class="btn btn-primary btn-sm" onclick="window.location.href='{{ url_for('modify_user', id=user.id) }}'">Güncelle</button>
                             <button class="btn btn-danger btn-sm mr-2" onclick="deleteUser({{ user.id }})">Sil</button>

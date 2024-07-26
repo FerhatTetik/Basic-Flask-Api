@@ -62,6 +62,7 @@
                     <th scope="col">İsim</th>
                     <th scope="col">Yazar</th>
                     <th scope="col">Fiyat</th>
+                    <th scope="col">Stok</th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -71,6 +72,7 @@
                         <td>{{ book.name }}</td>
                         <td>{{ book.author }}</td>
                         <td>{{ book.price }} TL</td>
+                        <td>{{ book.stock }}</td>
                         <td>
                             <button class="btn btn-primary btn-sm" onclick="window.location.href='{{ url_for('modify_book', id=book.id) }}'">Güncelle</button>
                             <button class="btn btn-danger btn-sm mr-2" onclick="deletebook({{ book.id }})">Sil</button>

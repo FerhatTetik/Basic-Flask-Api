@@ -4,9 +4,10 @@ from app.models.models import db, User, Book
 def create_user():
     name = request.form.get('name')
     email = request.form.get('email')
+    quantity = request.form.get('quantity')
     if not name or not email:
         return jsonify({'message': 'Name and email are required'}), 400
-    user = User(name=name, email=email)
+    user = User(name=name, email=email, quantity=quantity)
     db.session.add(user)
     db.session.commit()
     return jsonify({'message': f'User {name} created with email {email}'}), 201
@@ -20,6 +21,7 @@ def update_user(id):
     if user:
         user.name = request.form.get('name', user.name)
         user.email = request.form.get('email', user.email)
+        user.quantity = request.form.get('quantity', user.quantity)
         db.session.commit()
         return jsonify({'message': f'User {id} updated successfully'}), 200
     else:
@@ -38,9 +40,10 @@ def create_book():
     name = request.form.get('name')
     author = request.form.get('author')
     price = request.form.get('price')
+    stock = request.form.get('stock')
     if not name or not author:
         return jsonify({'message': 'Name and author are required'}), 400
-    book = Book(name=name, author=author, price=price)
+    book = Book(name=name, author=author, price=price, stock=stock)
     db.session.add(book)
     db.session.commit()
     return jsonify({'message': f'book {name} created with author {author}'}), 201
@@ -55,6 +58,7 @@ def update_book(id):
         book.name = request.form.get('name', book.name)
         book.author = request.form.get('author', book.author)
         book.price = request.form.get('price', book.price)
+        book.stock = request.form.get('stock', book.stock)
         db.session.commit()
         return jsonify({'message': f'book {id} updated successfully'}), 200
     else:

@@ -7,6 +7,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
+    book_quantity = db.Column(db.Integer, nullable=True)    
 
 class Book(db.Model):
     __tablename__ = 'book'
@@ -14,3 +15,4 @@ class Book(db.Model):
     name = db.Column(db.String(80), nullable=False)
     author = db.Column(db.String(120), nullable=False)
     price = db.Column(db.Integer, nullable=False)
+    stock = db.Column(db.Integer, nullable=False)
