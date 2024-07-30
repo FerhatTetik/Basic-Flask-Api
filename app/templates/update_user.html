@@ -45,6 +45,7 @@
                 <input type="email" class="form-control" id="email" name="email" value="{{ user.email }}" required>
             </div>
             <div class="form-group">
+<<<<<<< HEAD
                 <label for="books">Books:</label>
                 <div id="books">
                     {% for user_book in user.books %}
@@ -59,6 +60,10 @@
                     {% endfor %}
                 </div>
                 <button type="button" class="btn btn-secondary" onclick="addBook()">Add another book</button>
+=======
+              <label for="book_quantity">Adet:</label>
+              <input type="book_quantity" class="form-control" id="book_quantity" name="book_quantity" value="{{ user.book_quantity }}" required>
+>>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
             </div>
             <button type="submit" class="btn btn-primary">Update User</button>
             <a href="{{ url_for('users_list') }}" class="btn btn-secondary">Back to Users List</a>

@@ -62,7 +62,11 @@
                     <th scope="col">İsim</th>
                     <th scope="col">Yazar</th>
                     <th scope="col">Fiyat</th>
+<<<<<<< HEAD
                     <th scope="col">Adet</th>
+=======
+                    <th scope="col">Stok</th>
+>>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -72,7 +76,11 @@
                         <td>{{ book.name }}</td>
                         <td>{{ book.author }}</td>
                         <td>{{ book.price }} TL</td>
+<<<<<<< HEAD
                         <td>{{ book.quantity }}</td>
+=======
+                        <td>{{ book.stock }}</td>
+>>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
                         <td>
                             <button class="btn btn-primary btn-sm" onclick="window.location.href='{{ url_for('modify_book', id=book.id) }}'">Güncelle</button>
                             <button class="btn btn-danger btn-sm mr-2" onclick="deletebook({{ book.id }})">Sil</button>

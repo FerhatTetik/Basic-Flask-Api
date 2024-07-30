@@ -60,16 +60,27 @@
                 <tr>
                     <th scope="col">İsim</th>
                     <th scope="col">Email</th>
+<<<<<<< HEAD
                     <th scope="col">Kitaplar ve Adetleri</th>
                     <th scope="col">Toplam Ücret</th>
+=======
+                    <th scope="col">Kitap Adı</th>
+                    <th scope="col">Adet</th>
+>>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for user_info in user_data %}
                     <tr>
+<<<<<<< HEAD
                         <td>{{ user_info.user.name }}</td>
                         <td>{{ user_info.user.email }}</td>
+=======
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.book_quantity }}</td>
+>>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
                         <td>
                             <ul>
                                 {% for book in user_info.books %}

@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+from flask_migrate import Migrate
 from app.config import Config
 from app.models.models import db
 from app.db.crudFonksiyonları import (
