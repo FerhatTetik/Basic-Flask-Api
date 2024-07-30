@@ -49,7 +49,11 @@
             <div class="form-group">
               <label for="price">Fiyat(TL):</label>
               <input type="price" class="form-control" id="price" name="price" value="{{ book.price }}" required>
-          </div>
+            </div>
+            <div class="form-group">
+              <label for="quantity">Stok:</label>
+              <input type="quantity" class="form-control" id="quantity" name="quantity" value="{{ book.quantity }}" required>
+            </div>
             <button type="submit" class="btn btn-primary">Update book</button>
             <a href="{{ url_for('books_list') }}" class="btn btn-secondary">Back to books List</a>
         </form>

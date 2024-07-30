@@ -43,9 +43,13 @@
                 <input type="author" class="form-control" id="author" name="author" required>
             </div>
             <div class="form-group">
-              <label for="author">price:</label>
+              <label for="price">price:</label>
               <input type="price" class="form-control" id="price" name="price" required>
-          </div>
+            </div>
+            <div class="form-group">
+              <label for="quantity">quantity:</label>
+              <input type="quantity" class="form-control" id="quantity" name="quantity" required>
+            </div>
             <button type="submit" class="btn btn-primary">Kitapyı Oluştur</button>
             <a href="{{ url_for('books_list') }}" class="btn btn-secondary">Listeye geri Dön</a>
         </form>
