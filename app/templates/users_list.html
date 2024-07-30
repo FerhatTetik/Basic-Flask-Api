@@ -60,27 +60,16 @@
                 <tr>
                     <th scope="col">İsim</th>
                     <th scope="col">Email</th>
-<<<<<<< HEAD
                     <th scope="col">Kitaplar ve Adetleri</th>
                     <th scope="col">Toplam Ücret</th>
-=======
-                    <th scope="col">Kitap Adı</th>
-                    <th scope="col">Adet</th>
->>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
                     <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
                 {% for user_info in user_data %}
                     <tr>
-<<<<<<< HEAD
                         <td>{{ user_info.user.name }}</td>
                         <td>{{ user_info.user.email }}</td>
-=======
-                        <td>{{ user.name }}</td>
-                        <td>{{ user.email }}</td>
-                        <td>{{ user.book_quantity }}</td>
->>>>>>> 14f69c740acbcd664c4ea4e50d219b53481d04b4
                         <td>
                             <ul>
                                 {% for book in user_info.books %}
@@ -88,7 +77,7 @@
                                 {% endfor %}
                             </ul>
                         </td>
-                        <td>{{ user_info.total_price }} TL</td>
+                        <td>{{ user_info.total_price }}</td>
                         <td>
                             <button class="btn btn-primary btn-sm" onclick="window.location.href='{{ url_for('modify_user', id=user_info.user.id) }}'">Güncelle</button>
                             <button class="btn btn-danger btn-sm mr-2" onclick="deleteUser({{ user_info.user.id }})">Sil</button>
