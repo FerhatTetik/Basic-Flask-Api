@@ -11,25 +11,45 @@ Api_deneme_5, Flask kullanarak geliştirilmiş bir CRUD API ve basit bir kullan�
 
 ## Proje Yapısı
 Api_deneme_5/
+
 ├── app/
+
 │ ├── init.py
+
 │ ├── auth.py
+
 │ ├── config.py
+
 │ ├── models/
+
 │ │ ├── init.py
+
 │ │ ├── models.py
+
 │ ├── db/
+
 │ │ ├── users.py
+
 │ │ ├── books.py
+
 │ │ ├── init.py
+
 │ └── templates/
+
 │ ├── home_page.html
+
 │ ├── users_list.html
+
 │ ├── add_user.html
+
 │ ├── update_user.html
+
 │ ├── books_list.html
+
 │ ├── add_book.html
+
 │ └── update_book.html
+
 └── app.py
 
 
