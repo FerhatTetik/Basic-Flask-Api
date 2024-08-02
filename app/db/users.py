@@ -1,10 +1,7 @@
 from flask import request, jsonify, render_template, redirect, url_for
 from app.models.models import db, User, Book, user_book
 
-from flask import request, jsonify, render_template, redirect, url_for
-from app.models.models import db, User, Book, user_book
-
-def create_user(): #request model oluştur.
+def create_user():
     name = request.form.get('name')
     email = request.form.get('email')
     book_ids = request.form.getlist('book_ids[]')
@@ -54,43 +51,6 @@ def delete_user(id):
         return jsonify({'message': f'User {id} deleted successfully'}), 200
     else:
         return jsonify({'message': f'User {id} not found'}), 404
-    
-def create_book():
-    name = request.form.get('name')
-    author = request.form.get('author')
-    price = request.form.get('price')
-    quantity = request.form.get('quantity')
-    if not name or not author:
-        return jsonify({'message': 'Name and author are required'}), 400
-    book = Book(name=name, author=author, price=price,quantity=quantity)
-    db.session.add(book)
-    db.session.commit()
-    return jsonify({'message': f'book {name} created with author {author}'}), 201
-
-def get_books():
-    books = Book.query.all()
-    return books
-
-def update_book(id):
-    book = Book.query.get(id)
-    if book:
-        book.name = request.form.get('name', book.name)
-        book.author = request.form.get('author', book.author)
-        book.price = request.form.get('price', book.price)
-        book.quantity = request.form.get('quantity', book.quantity)
-        db.session.commit()
-        return jsonify({'message': f'book {id} updated successfully'}), 200
-    else:
-        return jsonify({'message': f'book {id} not found'}), 404
-
-def delete_book(id):
-    book = Book.query.get(id)
-    if book:
-        db.session.delete(book)
-        db.session.commit()
-        return jsonify({'message': f'book {id} deleted successfully'}), 200
-    else:
-        return jsonify({'message': f'book {id} not found'}), 404
 
 def handle_users_list():
     users = User.query.all()
@@ -111,7 +71,6 @@ def handle_users_list():
     
     return render_template('users_list.html', user_data=user_data)
 
-
 def handle_add_user():
     if request.method == 'POST':
         response, status_code = create_user()
@@ -120,7 +79,7 @@ def handle_add_user():
         else:
             return response, status_code
 
-    books = get_books()
+    books = Book.query.all()
     return render_template('add_user.html', books=books)
 
 def handle_update_user(id):
@@ -138,10 +97,8 @@ def handle_update_user(id):
         if not book_ids or not quantities:
             return jsonify({'message': 'Books and quantities are required'}), 400
         
-        # Önce mevcut kitap ilişkilerini sil
         db.session.execute(user_book.delete().where(user_book.c.user_id == user.id))
         
-        # Yeni kitap ilişkilerini ekle
         for book_id, quantity in zip(book_ids, quantities):
             book = Book.query.get(book_id)
             if book:
@@ -154,40 +111,9 @@ def handle_update_user(id):
         db.session.commit()
         return redirect(url_for('users_list'))
 
-    books = Book.query.all()  # Get all books to display in the dropdown
+    books = Book.query.all()
     return render_template('update_user.html', user=user, books=books)
-
 
 def handle_delete_user(id):
     response, status_code = delete_user(id)
-    return response, status_code
-
-def handle_books_list():
-    books = get_books()
-    return render_template('books_list.html', books=books)
-
-def handle_add_book():
-    if request.method == 'POST':
-        response, status_code = create_book()
-        if status_code == 201:
-            return redirect(url_for('books_list'))
-        else:
-            return response, status_code
-    return render_template('add_book.html')
-
-def handle_update_book(id):
-    if request.method == 'POST':
-        response, status_code = update_book(id)
-        if status_code == 200:
-            return redirect(url_for('books_list'))
-        else:
-            return response, status_code
-    book = Book.query.get(id)
-    if book:
-        return render_template('update_book.html', book=book)
-    else:
-        return jsonify({'message': f'book {id} not found'}), 404
-
-def handle_delete_book(id):
-    response, status_code = delete_book(id)
     return response, status_code
