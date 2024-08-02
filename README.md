@@ -47,6 +47,7 @@ Api_deneme_5/
 4. **Veritabanı Oluşturma**:
     Veritabanı bağlantı ayarlarını app/config.py dosyasındaki SQLALCHEMY_DATABASE_URI değişkeninde güncelleyin.
 
+    ```bash
     class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql://<kullanıcı_adı>:<şifre>@<host>:<port>/<veritabanı_adı>'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
@@ -62,22 +63,27 @@ Api_deneme_5/
 
 ## Kullanım
 *Ana Sayfa: / - Uygulamanın ana sayfası, kimlik doğrulama gerektirir.
+
 *Kullanıcılar:
     *Listeleme: /users
     *Ekleme: /users/add
     *Güncelleme: /users/update/<int:id>
     *Silme: /users/delete/<int:id>
+
 *Kitaplar:
     *Listeleme: /books
     *Ekleme: /books/add
     *Güncelleme: /books/update/<int:id>
     *Silme: /books/delete/<int:id>
-    *Giriş ve Çıkış:
-*Giriş: /login
+
+*Giriş ve Çıkış:
+    *Giriş: /login
     *Çıkış: /logout
-    *Konfigürasyon
+
+*Konfigürasyon
 JWT ayarları 'app/config.py' dosyasında yapılır:
 
+    ```bash
     class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql://<kullanıcı_adı>:<şifre>@<host>:<port>/<veritabanı_adı>'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
