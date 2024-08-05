@@ -62,7 +62,11 @@ JWT ayarları 'app/config.py' dosyasında yapılır:
     ```bash
     class Config:
     SQLALCHEMY_DATABASE_URI = 'postgresql://<kullanıcı_adı>:<şifre>@<host>:<port>/<veritabanı_adı>'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
-    JWT_SECRET_KEY = 'your_jwt_secret_key'
+        SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_SECRET_KEY = 'jwt_secret_key'  # JWT için gizli anahtar
+    JWT_ACCESS_TOKEN_EXPIRES = timedelta(minutes=30)  # Token süresi
     JWT_TOKEN_LOCATION = ['cookies']
     JWT_COOKIE_CSRF_PROTECT = False
+    JWT_ACCESS_COOKIE_PATH = '/'
+    JWT_ACCESS_COOKIE_NAME = 'access_token_cookie'
+    JWT_REFRESH_COOKIE_NAME = 'refresh_token_cookie'
