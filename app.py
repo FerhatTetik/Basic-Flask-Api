@@ -1,8 +1,9 @@
-from flask import Flask, redirect, render_template, request, jsonify, url_for, make_response
-from flask_jwt_extended import JWTManager, jwt_required, create_access_token, unset_jwt_cookies, set_access_cookies
+from flask import Flask, redirect, render_template, request, jsonify, session, url_for, make_response
+from flask_jwt_extended import JWTManager, get_jwt_identity, jwt_required, create_access_token, unset_jwt_cookies, set_access_cookies
 from app.config import Config
 from app.models.models import Admin, db
-from app.db.auth import login, logout
+from app.db.auth import login, logout, super_admin_required
+from app.db.admins import admin_list, update_admin, add_admin, delete_admin
 from app.db.users import (
     handle_users_list,
     handle_add_user,
@@ -30,7 +31,8 @@ with app.app_context():
 @app.route('/')
 @jwt_required()
 def anaSayfa():
-    return render_template('home_page.html')
+    username = get_jwt_identity()  # Bu doğrudan kullanıcı adı olabilir.
+    return render_template('home_page.html', username=username)
 
 @app.route('/users')
 @jwt_required()
@@ -71,6 +73,30 @@ def modify_book(id):
 @jwt_required()
 def remove_book(id):
     return handle_delete_book(id)
+
+@app.route('/admins', methods=['GET'])
+@jwt_required()
+@super_admin_required
+def admins():
+    return admin_list()
+
+@app.route('/admins/update/<int:id>', methods=['GET', 'POST'])
+@jwt_required()
+@super_admin_required
+def admin_update_view(id):
+    return update_admin(id)
+
+@app.route('/admins/add', methods=['GET', 'POST'])
+@jwt_required()
+@super_admin_required
+def admin_add():
+    return add_admin()
+
+@app.route('/admins/delete/<int:id>', methods=['DELETE'])
+@jwt_required()
+@super_admin_required
+def admin_delete(id):
+    return delete_admin(id)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_view():
