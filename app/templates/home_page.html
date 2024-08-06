@@ -39,7 +39,12 @@
     </nav>
 
     <div class="container mt-5">
-        <h1>Hoş Geldiniz!</h1>
+        <h1>Hoş Geldiniz, {{ username }}!</h1>
+        {% if msg %}
+            <div class="alert alert-warning" role="alert">
+                {{ msg }}
+            </div>
+        {% endif %}
         <p>Bu sayfa sadece giriş yaptıktan sonra erişilebilir.</p>
     </div>
 

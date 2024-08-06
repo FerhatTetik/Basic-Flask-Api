@@ -55,9 +55,9 @@
                     <td>{{ admin.username }}</td>
                     <td>
                         {% if admin.is_super_admin %}
-                            <span class="badge bg-success">Yes</span>
+                            <span class="badge bg-success">Evet</span>
                         {% else %}
-                            <span class="badge bg-secondary">No</span>
+                            <span class="badge bg-danger">Hayır</span>
                         {% endif %}
                     </td>
                     <td>
@@ -68,6 +68,8 @@
                 {% endfor %}
             </tbody>
         </table>
+        <button class="btn btn-success" onclick="window.location.href='{{ url_for('admin_add') }}'">Admin Ekle</button>
+
     </div>
 
     <script>
@@ -80,7 +82,7 @@
                         location.reload();
                     } else {
                         response.json().then(data => {
-                            alert(data.message);  // Hata mesajını göster
+                            alert(data.message);
                         });
                     }
                 });

@@ -1,8 +1,8 @@
-from flask import Flask, redirect, render_template, request, jsonify, session, url_for, make_response
-from flask_jwt_extended import JWTManager, get_jwt_identity, jwt_required, create_access_token, unset_jwt_cookies, set_access_cookies
+from flask import Flask, render_template
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from app.config import Config
-from app.models.models import Admin, db
-from app.db.auth import login, logout, super_admin_required
+from app.models.models import db
+from app.auth import login, logout, super_admin_required
 from app.db.admins import admin_list, update_admin, add_admin, delete_admin
 from app.db.users import (
     handle_users_list,
@@ -16,22 +16,23 @@ from app.db.books import(
     handle_delete_book,
     handle_books_list
 )
+from app.error_handlers import register_error_handlers 
 
 app = Flask(__name__, template_folder='app/templates')
 app.config.from_object(Config)
-
-# JWTManager'ı başlat
-jwt = JWTManager(app)
+app.secret_key = 'your_secret_key'
 
 db.init_app(app)
 
 with app.app_context():
     db.create_all()
 
-@app.route('/')
+register_error_handlers(app)
+
+@app.route('/home')
 @jwt_required()
 def anaSayfa():
-    username = get_jwt_identity()  # Bu doğrudan kullanıcı adı olabilir.
+    username = get_jwt_identity()
     return render_template('home_page.html', username=username)
 
 @app.route('/users')
@@ -98,7 +99,7 @@ def admin_add():
 def admin_delete(id):
     return delete_admin(id)
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def login_view():
     return login()
 

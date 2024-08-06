@@ -27,7 +27,7 @@ def super_admin_required(fn):
     @wraps(fn)
     def wrapper(*args, **kwargs):
         claims = get_jwt()
-        if claims.get("is_super_admin"):  # claims.get kullanarak KeyError'ı önleyin
+        if claims.get("is_super_admin"):
             return fn(*args, **kwargs)
         else:
             return jsonify({"msg": "Access forbidden: Super admin required"}), 403
